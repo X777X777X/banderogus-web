@@ -9,9 +9,9 @@ goToFormButton.addEventListener("click", function (e) {
 });
 
 function clearFormFields() {
-  const modalFiends = formModal.querySelectorAll("input");
+  const modalFields = form.querySelectorAll("input");
 
-  modalFiends.forEach((field) => {
+  modalFields.forEach((field) => {
     field.value = "";
   });
 }
@@ -24,9 +24,9 @@ function showGooseAnim() {
 
   targetContainer.appendChild(gusImage);
 
-  setTimeout(2000, () => {
+  setTimeout(() => {
     targetContainer.removeChild(gusImage);
-  });
+  }, 2000);
 }
 
 form.addEventListener("submit", (e) => {
@@ -35,7 +35,7 @@ form.addEventListener("submit", (e) => {
 
   launchBtn.setAttribute("disabled", true);
 
-  if (userEmailField?.value?.length > 30) {
+  if (userEmailField?.value?.length > 100) {
     return;
   }
 
@@ -48,11 +48,13 @@ form.addEventListener("submit", (e) => {
       showGooseAnim();
 
       setTimeout(() => {
-        // launchBtn.removeAttribute('disabled')
-        // clearFormFields();
+        launchBtn.removeAttribute("disabled");
+        clearFormFields();
       }, 2000);
     })
-    .catch((error) => console.log("Sending form failed"));
+    .catch((error) => {
+      console.log("Sending form failed");
+    });
 });
 
 launchBtn.addEventListener("click", onClick);
